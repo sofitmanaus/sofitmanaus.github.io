@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { AccessControlModule } from './modules/access-control/access-control.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import * as  Cloudinary from 'cloudinary-core';
     AngularFireStorageModule,
     AngularFirestoreModule,
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'drhhv4pjk'}),
+    LazyLoadImageModule,
 
     ReactiveFormsModule,
 
@@ -36,6 +39,7 @@ import * as  Cloudinary from 'cloudinary-core';
     CoreModule,
     LayoutModule,
     MainModule,
+    AccessControlModule
   ],
   providers: [],
   bootstrap: [AppComponent]

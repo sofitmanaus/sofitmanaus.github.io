@@ -51,13 +51,16 @@
     }
 
     &:hover {
+      transform: translateY(-5px);
+      -webkit-transform: translateY(-5px);
+
       .gradient::before {
         opacity: 1;
       }
     }
 
 
-    .cuntainer {
+    .image-container {
       position: absolute;
       border-radius: 15px;
       overflow: hidden;
@@ -67,6 +70,8 @@
 
       .card-image {
         z-index: 0;
+        transition: 0.4s ease-out;
+        -webkit-transition: 0.4s ease-out;
       }
 
       .card-image {
@@ -75,11 +80,6 @@
         min-height: 100%;
       }
 
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-      -webkit-transform: translateY(-5px);
     }
 
     .card-footer {
