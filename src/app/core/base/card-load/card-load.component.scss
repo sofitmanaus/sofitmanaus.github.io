@@ -1,0 +1,64 @@
+.card {
+  position: relative;
+  z-index: 1;
+  min-width: 18rem;
+  min-height: 10rem;
+  transition: 0.4s ease-out;
+  -webkit-transition: 0.4s ease-out;
+  will-change: transition;
+  border-radius: 15px;
+  border: none;
+  //box-shadow: 0px 7px 10px rgba(black, 0.3);
+
+  .element1 {
+    position: absolute;
+    top: 110px;
+    bottom: 0;
+    left: 20px;
+    right: 0;
+    height: 30px;
+    width: 96px;
+  }
+
+  .element2 {
+    position: absolute;
+    top: 82px;
+    bottom: 0;
+    left: 198px;
+    right: 0;
+    height: 25px;
+    width: 72px;
+  }
+
+  .element3 {
+    position: absolute;
+    top: -30px;
+    bottom: 0;
+    left: 20px;
+    right: 0;
+    height: 75px;
+    width: 250px;
+  }
+
+  .gradient {
+    animation-duration: 1.8s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%);
+    background-size: 1000px 640px;
+
+    position: relative;
+  }
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
