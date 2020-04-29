@@ -1,1 +1,0 @@
-sofitmanaus.github.io
