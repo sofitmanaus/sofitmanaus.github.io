@@ -1,0 +1,78 @@
+.app-topbar {
+  background-color: #4a829a !important;
+  height: 65px;
+  box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.1);
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+
+    .navbar-toggler {
+      border-color: white !important;
+      height: 40px;
+      margin-top: 6px;
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+    }
+  }
+
+
+  .page-title {
+    margin-bottom: 0px;
+    color: white;
+    margin-left: -6px;
+    line-height: 48px;
+  }
+
+  .navbar-collapse {
+    background-color: #4a829a;
+    z-index: 2;
+  }
+
+  img {
+    width: 34px;
+    height: 51px;
+  }
+
+  .info {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .btn {
+          color: white;
+      }
+
+      h1 {
+          margin: 0px;
+          padding: 0px;
+          margin-left: 0px !important;
+          color: #FFFFFF;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 22px;
+      }
+  }
+}
+
+@media screen and (min-width: 992px) {
+
+  .nav-container {
+    justify-content: flex-end !important;
+    flex-direction: row-reverse;
+  }
+
+  .page-title {
+    margin-left: 12px !important;
+  }
+
+}
+
+@media screen and (max-width: 992px) {
+
+  .nav-container {
+    width: 100%;
+  }
+}
