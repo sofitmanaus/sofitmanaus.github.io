@@ -10,11 +10,11 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-            "styleext": "scss",
-            "spec": false
+          "styleext": "scss",
+          "spec": false
         },
         "@schematics/angular:service": {
-            "spec": false
+          "spec": false
         }
       },
       "architect": {
@@ -131,6 +131,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "sofit"
+    }
+  },
+  "defaultProject": "sofit",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
