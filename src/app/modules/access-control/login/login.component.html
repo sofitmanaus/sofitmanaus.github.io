@@ -7,7 +7,15 @@
 </div>
 
 <ng-template #login>
-  <button class="button" (click)="auth.googleSignIn()">Login With Google</button>
+  <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)="logInAnonymous()">Anonymous Login</button>
+  <button class="button" (click)="loginGoogle()">Login With Google</button>
+  <button class="button" (click)="loginFacebook()">Login With Facebook</button>
+  <hr>
 </ng-template>
+
+<button type="button" class="btn btn-primary" (click)="linkGoogle()">Link to Google Account</button>
+<button type="button" class="btn btn-primary" (click)="unlinkGoogle()">Unlink to Google Account</button>
+<button type="button" class="btn btn-primary" routerLink="admin">Página do Ademir</button>
+<button type="button" class="btn btn-primary" routerLink="content">Página do Cliente</button>
 
 <router-outlet></router-outlet>

@@ -8,7 +8,6 @@ const routes: Routes = [
     {
         path: 'app',
         canActivate: [
-          AuthGuard
         ],
         component: AppMainComponent,
         children: [

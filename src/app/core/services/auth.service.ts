@@ -29,19 +29,49 @@ export class AuthService {
     );
   }
 
+  async anonymousLogin() {
+    const result = await this.afAuth.signInAnonymously();
+    return this.updateUserData(result.user);
+  }
+
+  // async emailPasswordSignin(email: string, password: string) {
+  //   const result = await this.afAuth.signInWithEmailAndPassword(email, password);
+  //   return this.updateUserData(result);
+  // }
+
+  async linkGoogleAccount() {
+    const provider = new auth.GoogleAuthProvider();
+    const user = await this.afAuth.currentUser;
+    const credential = await user.linkWithPopup(provider);
+    return this.updateUserData(credential.user);
+  }
+
+  async unlinkGoogleAccount() {
+    const provider = new auth.GoogleAuthProvider();
+    const user = await this.afAuth.currentUser;
+    const result = await user.unlink(provider.providerId);
+    return this.updateUserData(result);
+  }
+
   async googleSignIn() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     return this.updateUserData(credential.user);
   }
 
+  async facebookSignIn() {
+    const provider = new auth.FacebookAuthProvider();
+    const credential = await this.afAuth.signInWithPopup(provider);
+    return this.updateUserData(credential.user);
+  }
+
   async signOut() {
     await this.afAuth.signOut();
-    return this.router.navigate(['/']);
+    return this.router.navigate(['/login']);
   }
 
   // Desestruturando o objeto para designar automaticamente os valores
-  private updateUserData({ uid, email, displayName, photoURL, roles }: UserModel) {
+  private updateUserData({ uid, email, displayName, photoURL }: UserModel) {
     const userRef: AngularFirestoreDocument<UserModel> = this.firestore.doc(`users/${uid}`);
 
     const data: UserModel = {
@@ -60,8 +90,11 @@ export class AuthService {
   private checkAuthorization(user: UserModel, allowedRoles: string[]): boolean {
     if (!user) return false;
     for (const role of allowedRoles) {
-      return true;
+      if (user.roles[role]) {
+        return true;
+      }
     }
+    return false;
   }
 
   canRead(user: UserModel): boolean {
