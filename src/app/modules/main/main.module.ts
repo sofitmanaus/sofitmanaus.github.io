@@ -10,24 +10,30 @@ import { ResumirPipe } from 'src/app/core/pipes/resumir.pipe';
 import { FoodService } from 'src/app/core/services/food.service';
 import { FirestoreService } from 'src/app/core/services/firestore.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { MapComponent } from './map/map.component';
+import { MapService } from 'src/app/core/services/map.service';
+import { FormsModule } from '@angular/forms';
 @NgModule({
 
   declarations: [
     AppMainComponent,
-    CardapioComponent
+    CardapioComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
     CoreModule,
     LayoutModule,
     MainRoutingModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    FormsModule
   ],
   providers: [
     ResumirPipe,
     FoodService,
     FirestoreService,
-    CurrencyPipe
+    CurrencyPipe,
+    MapService
   ],
   bootstrap: [AppComponent]
 })

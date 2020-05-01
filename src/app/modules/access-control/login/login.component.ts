@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   owner: string;
   contact: string;
   loading: boolean;
+  route;
 
   constructor(
       private auth: AuthService,
