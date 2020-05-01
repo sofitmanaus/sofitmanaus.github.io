@@ -29,6 +29,7 @@
     "cloudinary-core": "^2.8.2",
     "firebase": "^7.14.2",
     "jquery": "^3.5.0",
+    "leaflet": "^1.6.0",
     "mapbox-gl": "^1.10.0",
     "ng-lazyload-image": "^7.1.0",
     "ngx-bootstrap": "^5.6.1",

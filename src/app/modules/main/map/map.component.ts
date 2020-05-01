@@ -62,7 +62,6 @@ export class MapComponent implements OnInit{
     this.map.on('click', (event) => {
       const coordinates = [event.lngLat.lng, event.lngLat.lat]
       const newMarker   = new GeoJson(coordinates, { message: this.message })
-      console.log(newMarker)
       this.mapService.createMarker(newMarker)
     })
 
@@ -84,7 +83,6 @@ export class MapComponent implements OnInit{
 
       /// subscribe to realtime database and set data source
       this.markers.subscribe(markers => {
-          console.log(markers);
           let data = new FeatureCollection(markers)
           this.source.setData(data)
       })

@@ -15,7 +15,7 @@ export const environment = {
     measurementId: "G-4EGNC752E7"
   },
   mapbox: {
-    accessToken: 'pk.eyJ1Ijoia3Jpc2FuZHJlNyIsImEiOiJjazluZnJmcmIwMXQ3M2ZxcnJzeDVqZmZ5In0.OqtKQ2ayJF3yQdhJtwbmzA'
+    accessToken: 'pk.eyJ1Ijoia3Jpc2FuZHJlNyIsImEiOiJjazlvNWhubGwwMWVrM2RxcGYwaHBpYWN2In0.Ql-1vpo5eTZJXmj5D5augw'
   },
   APP: {
     NAME: 'Sofit',

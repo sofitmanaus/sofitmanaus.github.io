@@ -19,17 +19,18 @@ export class MapService {
   }
 
   createMarker({properties, type, geometry}: GeoJson) {
+    const markerDoc: AngularFirestoreDocument<GeoJson> = this.firestore.collection<GeoJson>('markers').doc(this.firestore.createId())
+    properties['id'] = markerDoc.ref.id
     const data: GeoJson = {
-      properties,
+      properties: properties,
       type,
       geometry
     }
-    return this.firestore.collection<GeoJson>('markers').add(data)
+    return markerDoc.set(data)
   }
 
-  removeMarker($key) {
-    console.log($key)
-    const markerRef: AngularFirestoreDocument<GeoJson> = this.firestore.doc(`markers/${$key}`)
+  removeMarker(marker: GeoJson) {
+    const markerRef: AngularFirestoreDocument<GeoJson> = this.firestore.doc(`markers/${marker.properties.id}`)
     return markerRef.delete()
   }
 
