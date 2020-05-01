@@ -10,7 +10,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage"
 import { environment } from 'src/environments/environment';
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
@@ -18,6 +18,7 @@ import * as  Cloudinary from 'cloudinary-core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { AccessControlModule } from './modules/access-control/access-control.module';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule }    from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'drhhv4pjk'}),
     LazyLoadImageModule,
     FormsModule,
+    HttpClientModule,
 
     // App modules
     CoreModule,

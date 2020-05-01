@@ -24,6 +24,8 @@
     "@cloudinary/angular-5.x": "^1.2.2",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@popperjs/core": "^2.3.3",
+    "@turf/helpers": "^6.1.4",
+    "@types/mapbox-gl": "^1.9.1",
     "angular-cli-ghpages": "^0.6.2",
     "bootstrap": "^4.4.1",
     "cloudinary-core": "^2.8.2",
