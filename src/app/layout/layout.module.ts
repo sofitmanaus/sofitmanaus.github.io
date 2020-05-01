@@ -5,11 +5,15 @@ import { FooterComponent } from './footer/footer.component';
 import { CoreModule } from '../core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderSectionComponent } from './loader-section/loader-section.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
-    TopbarComponent
+    TopbarComponent,
+    LoaderComponent,
+    LoaderSectionComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +23,9 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
   ],
   exports: [
     TopbarComponent,
-    FooterComponent
+    FooterComponent,
+    LoaderComponent,
+    LoaderSectionComponent
   ]
 })
 export class LayoutModule { }

@@ -10,4 +10,6 @@ export interface UserModel {
   displayName?: string;
   photoURL?: string;
   roles?: Roles;
+  username?: string;
+  password?: string;
 }

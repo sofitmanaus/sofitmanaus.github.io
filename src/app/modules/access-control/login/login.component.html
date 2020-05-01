@@ -1,21 +1,43 @@
-<h1>Base</h1>
+<section class="login-section">
+  <div class="container">
+    <div class="card login-form">
+      <div class="card-body">
+        <h3 class="card-title text-center">Log In</h3>
+        <div class="tabs">
+          <a href="" routerLink="login/sign-in">Login</a>
+          |
+          <a href="" routerLink="login/sign-up">Criar conta</a>
+        </div>
+        <div class="card-text">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                type="email"
+                class="form-control form-control-sm"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <a class="float-right" href="#">Forgot password?</a>
+              <input
+                type="password"
+                class="form-control form-control-sm"
+                id="exampleInputPassword1"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Sign in
+            </button>
 
-<div *ngIf="auth.user$ | async as user; else login">
-  <pre>{{ user | json }}</pre>
-  <hr>
-  <button class="button" (click)="auth.signOut()">Sign Out</button>
-</div>
-
-<ng-template #login>
-  <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)="logInAnonymous()">Anonymous Login</button>
-  <button class="button" (click)="loginGoogle()">Login With Google</button>
-  <button class="button" (click)="loginFacebook()">Login With Facebook</button>
-  <hr>
-</ng-template>
-
-<button type="button" class="btn btn-primary" (click)="linkGoogle()">Link to Google Account</button>
-<button type="button" class="btn btn-primary" (click)="unlinkGoogle()">Unlink to Google Account</button>
-<button type="button" class="btn btn-primary" routerLink="admin">Página do Ademir</button>
-<button type="button" class="btn btn-primary" routerLink="content">Página do Cliente</button>
-
-<router-outlet></router-outlet>
+            <div class="sign-up">
+              Don't have an account? <a href="#">Create One</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
