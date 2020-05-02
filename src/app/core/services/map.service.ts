@@ -13,7 +13,8 @@ export class MapService {
   markers: Observable<GeoJson[]>
 
   constructor(private firestore: AngularFirestore) {
-    mapboxgl.accessToken = environment.mapbox.accessToken
+    //@ts-ignore
+    mapboxgl.accessToken  = environment.mapbox.accessToken
     this.markersCollection = this.firestore.collection<GeoJson>('markers')
     this.markers = this.markersCollection.valueChanges()
   }
