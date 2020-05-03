@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodModel } from 'src/app/core/models/food.model';
 import { Cloudinary } from '@cloudinary/angular-5.x';
+import { StateChange } from 'ng-lazyload-image';
 
 @Component({
   selector: 'app-cardapio',
@@ -184,6 +185,12 @@ export class CardapioComponent implements OnInit {
   ]
 
   constructor(private cloudinary: Cloudinary) { }
+
+  imageCallback(event: StateChange, index: number) {
+    if (event.reason === 'loading-succeeded') {
+      this.foods[index].loading = false;
+    }
+  }
 
   ngOnInit(): void {
   }

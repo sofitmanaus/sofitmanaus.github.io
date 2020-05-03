@@ -1,0 +1,6 @@
+<div *ngIf="item$ | async as item">
+  <h1>{{item.title}}</h1>
+  <p>{{item.content}}</p>
+  <button *ngIf="auth.canEdit(this.user)" class="btn btn-warning" (click)="editPost()">Edit Post</button>
+  <button *ngIf="auth.canEdit(this.user)" class="btn btn-danger" (click)="deletePost()">Delete Post</button>
+</div>

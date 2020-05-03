@@ -2,8 +2,8 @@
   <div class="card-deck row mx-0">
     <div class="card border-0 px-0 col-1 mb-3" *ngFor="let food of foods; let i = index;">
       <app-card-load *ngIf="false"></app-card-load>
-      <div class='cuntainer'>
-        <img class="card-image" [src]="food.image" alt="">
+      <div class='image-container'>
+        <img (onStateChange)="imageCallback($event, i)" [defaultImage]="'assets/images/sofit-logo-nocircle.png'" [lazyLoad]="food.image" class="card-image" [alt]="food.title">
       </div>
       <div class="container d-flex flex-column justify-content-end h-100 gradient">
         <div class="card-footer font-weight-bold text-white border-top-0 pb-0 px-2">

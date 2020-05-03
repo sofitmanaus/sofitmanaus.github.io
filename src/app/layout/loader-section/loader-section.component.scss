@@ -1,0 +1,24 @@
+@import "../../../scss/variables";
+
+.card.card-loader {
+    // border: none;
+    .card-body {
+        background-color: transparent;
+        .loader-message {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            color: $default-grey;
+
+            .spinner {
+                color: $default-green !important;
+                font-size: 30px;
+            }
+
+            .label {
+                padding-left: 10px;
+            }
+        }
+    }
+}

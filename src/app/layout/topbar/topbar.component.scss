@@ -1,11 +1,13 @@
 .app-topbar {
   background-color: #4a829a !important;
-  height: 65px;
+  min-height: 65px;
   box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
 
   .nav-container {
     display: flex;
     justify-content: space-between;
+    backface-visibility: hidden;
 
     .navbar-toggler {
       border-color: white !important;
@@ -18,7 +20,6 @@
     }
   }
 
-
   .page-title {
     margin-bottom: 0px;
     color: white;
@@ -28,32 +29,17 @@
 
   .navbar-collapse {
     background-color: #4a829a;
-    z-index: 2;
+
+    .profile-picture {
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 
-  img {
+  .navbar-brand > img {
     width: 34px;
     height: 51px;
-  }
-
-  .info {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      .btn {
-          color: white;
-      }
-
-      h1 {
-          margin: 0px;
-          padding: 0px;
-          margin-left: 0px !important;
-          color: #FFFFFF;
-          font-size: 18px;
-          font-weight: 500;
-          line-height: 22px;
-      }
   }
 }
 

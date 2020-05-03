@@ -10,11 +10,16 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage"
 import { environment } from 'src/environments/environment';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { AccessControlModule } from './modules/access-control/access-control.module';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule }    from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -23,19 +28,24 @@ import * as  Cloudinary from 'cloudinary-core';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     CollapseModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFirestoreModule,
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'drhhv4pjk'}),
-
+    LazyLoadImageModule,
+    FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    SweetAlert2Module.forRoot(),
 
     // App modules
     CoreModule,
     LayoutModule,
     MainModule,
+    AccessControlModule
   ],
   providers: [],
   bootstrap: [AppComponent]
