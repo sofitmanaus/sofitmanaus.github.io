@@ -11,6 +11,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, children: [
+    { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
     { path: 'content', component: ContentComponent, canActivate:[CanReadGuard] },
     { path: 'admin', component: AdminComponent, canActivate:[AdminGuard] },
     { path: 'sign-in', component: SignInComponent },

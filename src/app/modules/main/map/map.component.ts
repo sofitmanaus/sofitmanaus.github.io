@@ -47,7 +47,6 @@ export class MapComponent implements OnInit{
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.truckLocationPos = [this.lng, this.lat];
-        console.log(this.truckLocationPos)
         this.truckLocationLat = [this.lng, this.lat];
 
         this.map.flyTo({

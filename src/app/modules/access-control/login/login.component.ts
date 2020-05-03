@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { take, map, tap, switchMap } from 'rxjs/operators';
+import { take, map, tap, switchMap, first } from 'rxjs/operators';
 import { UserModel } from 'src/app/core/models/user.model';
 import { of } from 'rxjs';
 import { User } from 'firebase';
@@ -33,9 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-      // if (this.auth.isAuthenticated()) {
-      //     this.redirectToHome();
-      // }
+    let isUser = this.auth.user$.pipe(
+      first(user => user != null)
+    )
+    isUser.subscribe(user => this.redirect())
   }
 
   public async login() {
@@ -64,10 +65,10 @@ export class LoginComponent implements OnInit {
   private isValid(): boolean {
       let isValid = true;
       this.toastr.clear();
-      if (!this.user.username && !this.user.password) {
+      if (!this.user.email && !this.user.password) {
           this.toastr.error('Informe o nome de usuário e senha');
           isValid = false;
-      } else if (!this.user.username) {
+      } else if (!this.user.email) {
           this.toastr.error('Informe o nome de usuário');
           isValid = false;
       } else if (!this.user.password) {
@@ -77,29 +78,32 @@ export class LoginComponent implements OnInit {
       return isValid;
   }
 
-    private redirectToHome() {
-        this.router.navigate(['app/home']);
+    private redirect() {
+      this.router.navigate(['/app/cardapio']);
     }
 
   logInAnonymous() {
-    this.auth.anonymousLogin().then(() =>
-      this.toastr.success('Logado com sucesso!')
+    this.auth.anonymousLogin().then(() => {
+      this.redirect()
+    }
     ).catch(error => {
       this.toastr.error(error.code, 'Não foi possivel fazer o login.')
     })
   }
 
   loginGoogle() {
-    this.auth.googleSignIn().then(() =>
-      this.toastr.success('Logado com sucesso!')
+    this.auth.googleSignIn().then(() => {
+      this.redirect()
+    }
     ).catch(error => {
-      this.toastr.error(error.code, 'Não foi possivel fazer o login.');
+      this.toastr.error(error.code, 'Não foi possivel fazer o login.')
     });
   }
 
   linkGoogle() {
-    this.auth.linkGoogleAccount().then(() =>
+    this.auth.linkGoogleAccount().then(() => {
       this.toastr.success('Conta Google vinculada com sucesso!')
+    }
     ).catch(error => {
       console.error(error);
       switch (error.code) {
@@ -115,8 +119,9 @@ export class LoginComponent implements OnInit {
   }
 
   unlinkGoogle() {
-    this.auth.unlinkGoogleAccount().then(() =>
+    this.auth.unlinkGoogleAccount().then(() => {
       this.toastr.success('Conta Google desvinculada com sucesso!')
+    }
     ).catch(error => {
       console.error(error);
       switch (error.code) {
@@ -132,8 +137,9 @@ export class LoginComponent implements OnInit {
   }
 
   loginFacebook() {
-    this.auth.facebookSignIn().then(() =>
-      this.toastr.success('Logado com sucesso!')
+    this.auth.facebookSignIn().then(() => {
+      this.redirect()
+    }
     ).catch(error => {
       this.toastr.error(error.code, 'Não foi possivel fazer o login.');
     });

@@ -10,7 +10,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireStorageModule } from "@angular/fire/storage"
 import { environment } from 'src/environments/environment';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
@@ -36,6 +36,7 @@ import { HttpClientModule }    from '@angular/common/http';
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'drhhv4pjk'}),
     LazyLoadImageModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
 
     // App modules

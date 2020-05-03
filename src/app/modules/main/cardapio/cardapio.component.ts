@@ -188,7 +188,6 @@ export class CardapioComponent implements OnInit {
 
   imageCallback(event: StateChange, index: number) {
     if (event.reason === 'loading-succeeded') {
-      console.log(this.foods[index].loading)
       this.foods[index].loading = false;
     }
   }

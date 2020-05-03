@@ -1,1 +1,37 @@
-<p>sign-in works!</p>
+<div class="card-text">
+  <form [formGroup]="signInForm" (ngSubmit)="login()" novalidate>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input
+        type="email"
+        class="form-control form-control-sm"
+        id="email"
+        aria-describedby="emailHelp"
+        [ngClass]="{ 'is-invalid': isSubmitted && formControls.email.errors }"
+      />
+      <div *ngIf="isSubmitted && formControls.email.errors" class="invalid-feedback">
+        <div *ngIf="formControls.email.errors.required">Email is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <a class="float-right" href="#">Esqueceu a Senha?</a>
+      <input
+        type="password"
+        class="form-control form-control-sm"
+        id="password"
+        [ngClass]="{ 'is-invalid': isSubmitted && formControls.password.errors }"
+      />
+      <div *ngIf="isSubmitted && formControls.password.errors" class="invalid-feedback">
+        <div *ngIf="formControls.password.errors.required">Password is required</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">
+      Sign in
+    </button>
+
+    <div class="sign-up">
+      Não tem uma conta? <a href="#" routerLink="/login/sign-up">Crie uma aqui</a>
+    </div>
+  </form>
+</div>

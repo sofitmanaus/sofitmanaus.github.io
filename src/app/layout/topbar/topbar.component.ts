@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, ResolveStart } from '@angular/router';
-import {map, filter} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute, Router, ResolveStart } from '@angular/router'
+import {map, filter, first} from 'rxjs/operators'
+import { AuthService } from 'src/app/core/services/auth.service'
+import { UserModel } from 'src/app/core/models/user.model'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-topbar',
@@ -9,12 +12,18 @@ import {map, filter} from 'rxjs/operators';
 })
 export class TopbarComponent implements OnInit {
 
-  public pageTitle = '';
-  public navbarCollapsed = true;
+  pageTitle = ''
+  navbarCollapsed = true
+  user: Observable<UserModel>
 
   constructor(private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private auth: AuthService
   ) {
+  }
+
+  signOut() {
+    this.auth.signOut().then(res => this.router.navigate(['/login']))
   }
 
   setMyStyles() {
@@ -22,44 +31,46 @@ export class TopbarComponent implements OnInit {
       'width': '100%',
       'display': 'flex',
       'justify-content': 'space-between'
-    };
+    }
 
     if (this.navbarCollapsed) {
-      return;
+      return
     } else {
-      return styles;
+      return styles
     }
   }
 
   ngOnInit(): void {
+    this.user = this.auth.user$;
+
     // Verifica os eventos quando a página é atualizada
     this.route.url.subscribe(() => {
-      const data = this.route.snapshot.firstChild;
+      const data = this.route.snapshot.firstChild
       if (data) {
-        this.pageTitle = data.routeConfig.data.title;
+        this.pageTitle = data.routeConfig.data.title
       }
-    });
+    })
 
     // Verifica os eventos quando a rota muda, sem atualizar o HTML em si
     this.router.events.pipe(
         filter(event => event instanceof ResolveStart),
         map(event => {
-            let data = null;
+            let data = null
             // tslint:disable-next-line:no-string-literal
-            let route = event['state'].root;
+            let route = event['state'].root
 
             while (route) {
-                data = route.data || data;
-                route = route.firstChild;
+                data = route.data || data
+                route = route.firstChild
             }
 
-            return data;
+            return data
         }),
     ).subscribe(data => {
         if (data) {
-            this.pageTitle = data.title;
+            this.pageTitle = data.title
         }
-    });
+    })
   }
 
 }

@@ -65,6 +65,11 @@ export class AuthService {
     return this.updateUserData(credential.user);
   }
 
+  async emailSignIn(user: UserModel) {
+    const credential = await this.afAuth.signInWithEmailAndPassword(user.email, user.password);
+    return credential;
+  }
+
   async signOut() {
     await this.afAuth.signOut();
     return this.router.navigate(['/login']);
@@ -73,11 +78,15 @@ export class AuthService {
   // Desestruturando o objeto para designar automaticamente os valores
   private updateUserData({ uid, email, displayName, photoURL }: UserModel) {
     const userRef: AngularFirestoreDocument<UserModel> = this.firestore.doc(`users/${uid}`);
+    const firstName = displayName.split(" ")[0];
+    const lastName = displayName.substring(displayName.lastIndexOf(" ")+1);
 
     const data: UserModel = {
       uid,
       email,
       displayName,
+      firstName: firstName,
+      lastName: lastName,
       photoURL,
       roles: {
         client: true
