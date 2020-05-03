@@ -12,7 +12,7 @@
   <div class="collapse navbar-collapse px-3 px-lg-0" [collapse]="navbarCollapsed" [isAnimated]="true">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><img src="assets/images/anonymous.png" alt="User profile picture" width="25px" height="25px"></a>
+        <a class="nav-link" href="#"><img class="rounded-circle" [src]="photoURL" alt="User profile picture" width="25px" height="25px"></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">Olá, {{firstName}}!</a>

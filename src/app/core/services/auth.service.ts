@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { AngularFireAuth } from "@angular/fire/auth"
 import { Observable, of } from 'rxjs'
 import { UserModel } from '../models/user.model'
-import { AngularFirestore } from '@angular/fire/firestore'
+import { AngularFirestore, DocumentData } from '@angular/fire/firestore'
 import { Router } from '@angular/router'
 import { switchMap } from 'rxjs/operators'
 import { auth } from 'firebase/app'
@@ -70,10 +70,23 @@ export class AuthService {
 
   async emailSignIn(user: UserModel) {
     const credential = await this.afAuth.signInWithEmailAndPassword(user.email, user.password)
+    console.log(credential)
     if (credential.user.emailVerified !== true) {
       throw new Error("Você ainda não verificou seu email.");
     } else {
-      return this.updateUserData(credential.user, user.password, user.firstName, user.lastName)
+      console.log(credential.user, user.password)
+
+      const userRef = await this.firestore.doc(`users/${credential.user.uid}`).get().toPromise()
+      const userData = userRef.data()
+
+      const data: UserModel = {
+        email: userData.email,
+        displayName: userData.displayName,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        photoURL: userData.photoURL
+      }
+      this.userData.save(data)
     }
   }
 
@@ -96,6 +109,10 @@ export class AuthService {
       lastName = displayName.substring(displayName.lastIndexOf(" ") + 1)
     }
 
+    if (!photoURL) {
+      photoURL = '/assets/images/anonymous.png'
+    }
+
     const data: UserModel = {
       uid,
       email,
@@ -103,7 +120,6 @@ export class AuthService {
       firstName,
       lastName,
       photoURL,
-      password,
       roles: {
         client: true
       }
@@ -113,10 +129,13 @@ export class AuthService {
     return userRef.set(data, { merge: true})
   }
 
-  async isEmailUnique(email: string) {
-    const aggRef = await this.firestore.doc('aggregation/users').get().toPromise()
-    const aggData = aggRef.data()
-    return !aggData.emails.includes(email)
+  isEmailUnique(email: string): Observable<DocumentData> {
+    const aggRef = this.firestore.doc('aggregation/users').get()
+    return aggRef;
+  }
+
+  async resetPassword(email: string) {
+    return await this.afAuth.sendPasswordResetEmail(email)
   }
 
   private checkAuthorization(user: UserModel, allowedRoles: string[]): boolean {

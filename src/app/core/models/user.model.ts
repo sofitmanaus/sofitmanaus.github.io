@@ -5,7 +5,7 @@ export interface Roles {
 }
 
 export interface UserModel {
-  uid: string;
+  uid?: string;
   email: string;
   displayName?: string;
   firstName?: string;

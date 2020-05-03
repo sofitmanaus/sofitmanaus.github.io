@@ -9,6 +9,8 @@ import {
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UniqueEmailValidator } from 'src/app/core/validators/unique-email.validator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,17 +27,21 @@ export class SignUpComponent implements OnInit {
   @ViewChild('confirmPassword')
   confirmPassword: ElementRef
 
+  loading = false
+
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
     private router: Router,
     private renderer: Renderer2,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private emailValidator: UniqueEmailValidator
   ) {}
 
   ngOnInit(): void {
+
     this.signupForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', Validators.required, this.emailValidator.validate.bind(this.emailValidator)],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: [
         '',
@@ -47,7 +53,7 @@ export class SignUpComponent implements OnInit {
       ],
       firstName: ['', [Validators.required, Validators.maxLength(255)]],
       lastName: ['', [Validators.required, Validators.maxLength(255)]],
-    });
+    }, {updateOn: 'blur'});
 
     this.signupForm.controls.password.valueChanges.subscribe(() => {
       this.signupForm.controls.confirmPassword.updateValueAndValidity();
@@ -102,9 +108,26 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
+    this.loading = true;
     this.auth.emailSignUp(this.signupForm.value)
-    .then(res => this.router.navigateByUrl('/app/cardapio'))
+    .then(res => {
+      this.loading = true;
+      this.emailSentSwal().then(() => {
+        if (!Swal.isTimerRunning()) this.router.navigateByUrl('/app/cardapio')
+      })
+    })
     .catch(error => this.toastr.error(error.code, 'Não foi possivel criar sua conta.'))
+  }
+
+  private emailSentSwal() {
+    return Swal.fire({
+      title: 'Quase lá!',
+      text: 'Para concluir seu cadastro, vá até sua caixa postal e confirme seu email',
+      icon: 'warning',
+      showCloseButton: true,
+      timer: 3000,
+      timerProgressBar: true
+    })
   }
 
   private redirect() {

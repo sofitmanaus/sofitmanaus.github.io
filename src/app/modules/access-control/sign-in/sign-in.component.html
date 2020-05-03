@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <a class="float-right" href="#">Esqueceu a Senha?</a>
+      <button type="button" class="btn btn-link float-right p-0 border-0" (click)="forgotPassword()">Esqueceu a Senha?</button>
       <input
         type="password"
         class="form-control form-control-sm"
@@ -37,8 +37,9 @@
         <div *ngIf="formControls.password.errors.required">Campo obrigatório</div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">
-      Sign in
+    <button [disabled]="loading" type="submit" class="btn btn-primary btn-block">
+      Entre
+      <app-loader *ngIf="loading"></app-loader>
     </button>
 
     <div class="sign-up">

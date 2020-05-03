@@ -14,6 +14,7 @@ export class SignInComponent implements OnInit {
 
   signInForm: FormGroup;
   isSubmitted = false;
+  loading  = false;
 
   constructor(private formBuilder: FormBuilder,
     private auth: AuthService,
@@ -28,15 +29,18 @@ export class SignInComponent implements OnInit {
   }
 
   login(){
-    this.isSubmitted = true;
     if(this.signInForm.invalid){
       return;
     }
+
+    this.loading = true;
     this.auth.emailSignIn(this.signInForm.value)
       .then(res => {
+        this.loading = false;
         this.redirect()
       })
       .catch(error => {
+        this.loading = false;
         if (error.message == 'Você ainda não verificou seu email.') {
           this.verificationSwal().then(res => {
             if('value' in res) this.auth.sendVerificationEmail()
@@ -46,8 +50,51 @@ export class SignInComponent implements OnInit {
               })
             if('value' in res) this.auth.signOut()
           })
-        } else { this.toastr.error(error.code, 'Não foi possivel fazer o login.') }
+        } else {
+          switch (error.code) {
+            case 'invalid-argument':
+              this.toastr.error('Os dados inseridos estão incorretos', 'Não foi possivel fazer o login.')
+              break
+            case 'auth/user-not-found':
+              this.toastr.error('Email não está registrado', 'Não foi possivel fazer o login.')
+              break
+            default:
+              console.log(error)
+              this.toastr.error(error.code, 'Não foi possivel fazer o login.')
+              break
+          }
+        }
       })
+  }
+
+  forgotPassword() {
+    Swal.fire({
+      title: 'Insira seu email para poder recuperar sua senha',
+      input: 'email',
+      inputPlaceholder: 'Email',
+      showCloseButton: true
+    }).then(res => {
+      if ('value' in res) this.auth.resetPassword(res.value)
+      .then(()=> {
+        Swal.fire({
+          title: 'Email enviado com sucesso!',
+          showCloseButton: true,
+          timer: 3000,
+          timerProgressBar: true
+        })
+      })
+      .catch(error => {
+        let message = ''
+        if (error.message === 'EMAIL_NOT_FOUND') message = '(Email não encontrado)'
+        Swal.fire({
+          title: 'Opa!',
+          text: 'Não foi possível enviar o email de recuperação'+ message + '.',
+          showCloseButton: true,
+          timer: 3000,
+          timerProgressBar: true
+        })
+      })
+    })
   }
 
   private verificationSwal() {
@@ -64,6 +111,17 @@ export class SignInComponent implements OnInit {
     return Swal.fire({
       title: 'Email de confirmação enviado!',
       icon: 'success',
+      showCloseButton: true,
+      timer: 3000,
+      timerProgressBar: true
+    })
+  }
+
+  private loginErrorSwal(error: Error) {
+    return Swal.fire({
+      title: 'Opa!',
+      text: `Não foi possível fazer o login.\n(${error.message})`,
+      icon: 'error',
       showCloseButton: true,
       timer: 3000,
       timerProgressBar: true

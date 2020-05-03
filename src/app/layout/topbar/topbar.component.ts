@@ -45,9 +45,9 @@ export class TopbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.user = this.userData.get();
-    // if (this.user.photoURL) this.photoURL = this.user.photoURL;
-    // else if (this.user.firstName) this.firstName = this.user.firstName
+    this.user = this.userData.get();
+    this.photoURL = this.user.photoURL;
+    this.firstName = this.user.firstName
 
     // Verifica os eventos quando a página é atualizada
     this.route.url.subscribe(() => {
