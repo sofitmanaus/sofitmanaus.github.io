@@ -1,3 +1,48 @@
+.card-title{ font-weight:300; }
+
+.social-media > .btn {
+  width: 100px;
+
+  &.facebook {
+    background-color: #4267B2;
+    border-color: #4267B2;
+
+    &:hover {
+      background-color: darken(#4267B2, 10%);
+      border-color: darken(#4267B2, 10%);
+    }
+  }
+
+  &.google {
+    background-color: #db4a39;
+    border-color: #db4a39;
+
+    &:hover {
+      background-color: darken(#db4a39, 10%);
+      border-color: darken(#db4a39, 10%);
+    }
+  }
+}
+
+.or {
+  hr {
+    background-color: #cdcdcd;
+    margin-top: 1.2rem;
+  }
+
+  span {
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -1.5em;
+    color: darken(#cdcdcd, 15%);
+    background-color: white;
+    width: 3em;
+    text-align: center;
+    margin-top: -30.5px;
+  }
+}
+
 form {
   font-size: 14px;
 
@@ -16,5 +61,3 @@ form {
     padding:20px 0 0;
   }
 }
-
-

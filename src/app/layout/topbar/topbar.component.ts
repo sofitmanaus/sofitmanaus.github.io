@@ -4,6 +4,7 @@ import {map, filter, first} from 'rxjs/operators'
 import { AuthService } from 'src/app/core/services/auth.service'
 import { UserModel } from 'src/app/core/models/user.model'
 import { Observable } from 'rxjs'
+import { UserDataService } from 'src/app/core/services/user-data.service'
 
 @Component({
   selector: 'app-topbar',
@@ -14,11 +15,14 @@ export class TopbarComponent implements OnInit {
 
   pageTitle = ''
   navbarCollapsed = true
-  user: Observable<UserModel>
+  user: UserModel
+  photoURL = 'assets/images/anonymous.png'
+  firstName = 'Anonymous'
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private auth: AuthService
+              private auth: AuthService,
+              private userData: UserDataService
   ) {
   }
 
@@ -41,7 +45,9 @@ export class TopbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.auth.user$;
+    // this.user = this.userData.get();
+    // if (this.user.photoURL) this.photoURL = this.user.photoURL;
+    // else if (this.user.firstName) this.firstName = this.user.firstName
 
     // Verifica os eventos quando a página é atualizada
     this.route.url.subscribe(() => {

@@ -19,6 +19,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { AccessControlModule } from './modules/access-control/access-control.module';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule }    from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { HttpClientModule }    from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SweetAlert2Module.forRoot(),
 
     // App modules
     CoreModule,

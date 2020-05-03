@@ -40,6 +40,7 @@
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/mapbox-gl/dist/mapbox-gl.css",
               "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/sweetalert2/src/sweetalert2.scss",
               "src/styles.scss"
             ],
             "scripts": [

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { take, map, tap, switchMap, first } from 'rxjs/operators';
 import { UserModel } from 'src/app/core/models/user.model';
-import { of } from 'rxjs';
-import { User } from 'firebase';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -33,54 +30,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    let isUser = this.auth.user$.pipe(
-      first(user => user != null)
-    )
-    isUser.subscribe(user => this.redirect())
   }
 
-  public async login() {
-      if (this.isValid()) {
-          // try {
-          //     this.loading = true;
-          //     const response = await this.auth.anonymousLogin();
-          //     if (!response) {
-          //         this.toastr.error('Dados de acesso inválidos.');
-          //         this.loading = false;
-          //     } else {
-          //         this.loginService.saveUserData(response);
-          //         window.location.reload();
-          //     }
-          // } catch (response) {
-          //     this.loading = false;
-          //     if (response.error && response.error.erro) {
-          //         this.toastr.error(response.error.erro);
-          //     } else {
-          //         this.toastr.error('Dados de acesso inválidos.');
-          //     }
-          // }
-      }
+  private redirect() {
+    this.router.navigate(['/app/cardapio']);
   }
-
-  private isValid(): boolean {
-      let isValid = true;
-      this.toastr.clear();
-      if (!this.user.email && !this.user.password) {
-          this.toastr.error('Informe o nome de usuário e senha');
-          isValid = false;
-      } else if (!this.user.email) {
-          this.toastr.error('Informe o nome de usuário');
-          isValid = false;
-      } else if (!this.user.password) {
-          this.toastr.error('Informe a senha.');
-          isValid = false;
-      }
-      return isValid;
-  }
-
-    private redirect() {
-      this.router.navigate(['/app/cardapio']);
-    }
 
   logInAnonymous() {
     this.auth.anonymousLogin().then(() => {
@@ -89,15 +43,6 @@ export class LoginComponent implements OnInit {
     ).catch(error => {
       this.toastr.error(error.code, 'Não foi possivel fazer o login.')
     })
-  }
-
-  loginGoogle() {
-    this.auth.googleSignIn().then(() => {
-      this.redirect()
-    }
-    ).catch(error => {
-      this.toastr.error(error.code, 'Não foi possivel fazer o login.')
-    });
   }
 
   linkGoogle() {
@@ -134,14 +79,5 @@ export class LoginComponent implements OnInit {
           break
       }
     })
-  }
-
-  loginFacebook() {
-    this.auth.facebookSignIn().then(() => {
-      this.redirect()
-    }
-    ).catch(error => {
-      this.toastr.error(error.code, 'Não foi possivel fazer o login.');
-    });
   }
 }

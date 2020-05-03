@@ -20,7 +20,6 @@
     }
   }
 
-
   .page-title {
     margin-bottom: 0px;
     color: white;
@@ -30,31 +29,17 @@
 
   .navbar-collapse {
     background-color: #4a829a;
+
+    .profile-picture {
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 
-  img {
+  .navbar-brand > img {
     width: 34px;
     height: 51px;
-  }
-
-  .info {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      .btn {
-          color: white;
-      }
-
-      h1 {
-          margin: 0px;
-          padding: 0px;
-          margin-left: 0px !important;
-          color: #FFFFFF;
-          font-size: 18px;
-          font-weight: 500;
-          line-height: 22px;
-      }
   }
 }
 

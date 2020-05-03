@@ -8,6 +8,7 @@ import { LayoutModule } from 'src/app/layout/layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     AccessControlRoutingModule,
     LayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module
   ]
 })
 export class AccessControlModule { }
