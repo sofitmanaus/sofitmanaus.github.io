@@ -5,9 +5,9 @@ import { UserModel } from '../models/user.model'
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore'
 import { Router } from '@angular/router'
 import { switchMap } from 'rxjs/operators'
-import { auth } from 'firebase/app'
 import { AngularFirestoreDocument } from '@angular/fire/firestore'
 import { UserDataService } from './user-data.service'
+import { auth } from 'firebase'
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +68,10 @@ export class AuthService {
     return this.updateUserData(credential.user, user.password, user.firstName, user.lastName)
   }
 
+  async getSignInMethods(email:string) {
+    return await this.afAuth.fetchSignInMethodsForEmail(email)
+  }
+
   async emailSignIn(user: UserModel) {
     const credential = await this.afAuth.signInWithEmailAndPassword(user.email, user.password)
     console.log(credential)
@@ -87,7 +91,12 @@ export class AuthService {
         photoURL: userData.photoURL
       }
       this.userData.save(data)
+      return credential
     }
+  }
+
+  async linkCredential(credential: auth.AuthCredential) {
+    return (await this.afAuth.currentUser).linkWithCredential(credential)
   }
 
   async sendVerificationEmail() {

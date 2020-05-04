@@ -1,24 +1,39 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light app-topbar px-0">
-  <div class="px-3 nav-container">
+  <div class="px-3 nav-container d-flex justify-content-between">
     <button class="navbar-toggler" type="button" (click)="navbarCollapsed = !navbarCollapsed" [attr.aria-expanded]="!navbarCollapsed" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
       <h4 class="page-title">{{pageTitle}}</h4>
-      <a class="navbar-brand p-0 mr-0" href="#">
+      <a class="navbar-brand p-0 mr-0 ml-3" href="#">
         <img src="/assets/images/sofit-logo-nocircle.png" alt="sofit logo">
       </a>
   </div>
 
   <div class="collapse navbar-collapse px-3 px-lg-0" [collapse]="navbarCollapsed" [isAnimated]="true">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#"><img class="rounded-circle" [src]="photoURL" alt="User profile picture" width="25px" height="25px"></a>
+    <ul class="navbar-nav mt-2 mt-lg-0 pr-lg-3 text-white">
+      <li class="nav-item d-none d-lg-flex">
+        <div class="dropdown show d-flex flex-column justify-content-center">
+          <a class="btn dropdown-toggle pr-0" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="rounded-circle mr-2" [src]="photoURL" alt="User profile picture" width="25px" height="25px">
+          </a>
+        </div>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Olá, {{firstName}}!</a>
+      <li class="nav-item d-lg-none" *ngIf="!this.user">
+        <button class="btn btn-success" routerLink="/login/sign-up">Cadastre-se!</button>
       </li>
-      <li class="nav-item">
-        <a class="nav-link clickable"(click)="signOut()"><i class="fas fa-sign-out-alt fa-lg text-white"></i></a>
+      <li class="nav-item d-lg-none">
+        Logado como <b class="d-block">{{firstName}}</b>
+      </li>
+      <li class="nav-item d-lg-none">
+        Perfil
+      </li>
+      <li class="nav-item d-lg-none">
+        <span *ngIf="user; else login" (click)="signOut()">Sair</span>
+        <ng-template #login>
+          <span class="" routerLink="/login/sign-in">
+            Entrar
+          </span>
+        </ng-template>
       </li>
     </ul>
   </div>
