@@ -1,0 +1,95 @@
+<h3 class="card-title text-center">Crie uma Conta</h3>
+<div class="card-text">
+  <form [formGroup]="signupForm" (ngSubmit)="register()" novalidate>
+    <div class="form-row">
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nome"
+          formControlName="firstName"
+          [ngClass]="{ 'is-invalid': formControls.firstName.errors && (formControls.firstName.dirty || formControls.firstName.touched) }">
+          <div *ngIf="formControls.firstName.errors" class="invalid-feedback">
+            <div *ngIf="formControls.firstName.errors.required">Campo obrigatório</div>
+            <div *ngIf="formControls.firstName.errors.maxlength">Muito longo</div>
+          </div>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Sobrenome"
+          formControlName="lastName"
+          [ngClass]="{ 'is-invalid': formControls.lastName.errors && (formControls.lastName.dirty || formControls.lastName.touched) }">
+          <div *ngIf="formControls.lastName.errors" class="invalid-feedback">
+            <div *ngIf="formControls.lastName.errors.required">Campo obrigatório</div>
+            <div *ngIf="formControls.lastName.errors.maxlength">Muito longo</div>
+          </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          formControlName="email"
+          [email]="true"
+          [ngClass]="{ 'is-invalid': formControls.email.errors && (formControls.email.dirty || formControls.email.touched) }">
+          <div *ngIf="formControls.email.errors" class="invalid-feedback">
+            <div *ngIf="formControls.email.errors.required">Campo obrigatório</div>
+            <div *ngIf="formControls.email.errors.email">Email inválido</div>
+            <div *ngIf="formControls.email.errors.uniqueEmail">Email já cadastrado</div>
+          </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          #password
+          placeholder="Senha" [ngClass]="{ 'is-invalid': formControls.password.errors && (formControls.password.dirty || formControls.password.touched) }">
+          <div class="input-group-append">
+            <div class="input-group-text" (click)="togglePassword()">
+              <i class="far fa-eye-slash" *ngIf="isPasswordVisible; else closedPass"></i>
+              <ng-template #closedPass><i class="far fa-eye"></i></ng-template>
+            </div>
+          </div>
+          <div *ngIf="formControls.password.errors" class="invalid-feedback">
+
+            <div *ngIf="formControls.password.errors.required">Campo obrigatório</div>
+            <div *ngIf="formControls.password.errors.minlength">Mínimo de 8 caracteres</div>
+          </div>
+      </div>
+      <div class="col">
+        <input
+        type="password"
+        class="form-control"
+        placeholder="Confirmar Senha"
+        formControlName="confirmPassword"
+        #confirmPassword
+        [ngClass]="{ 'is-invalid': formControls.confirmPassword.errors && (formControls.confirmPassword.dirty || formControls.confirmPassword.touched) }">
+        <div class="input-group-append">
+          <div class="input-group-text" (click)="toggleConfirm()">
+            <i class="far fa-eye-slash" *ngIf="isConfirmVisible; else closedConfirm"></i>
+            <ng-template #closedConfirm><i class="far fa-eye"></i></ng-template>
+          </div>
+        </div>
+        <div *ngIf="formControls.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="formControls.confirmPassword.errors.required">Campo obrigatório</div>
+          <div *ngIf="formControls.confirmPassword.errors.minlength">Mínimo de 8 caracteres</div>
+          <div *ngIf="!formControls.confirmPassword.errors.isMatching">As senhas estão diferentes</div>
+        </div>
+      </div>
+    </div>
+    <button [disabled]="loading" type="submit" class="btn btn-primary btn-block">
+      Criar conta
+      <app-loader *ngIf="loading"></app-loader>
+    </button>
+    <button class="btn btn-link pl-0" routerLink="/login/sign-in">
+      <i class="fa fa-arrow-left fa-sm" aria-hidden="true"></i> Voltar ao Login
+    </button>
+  </form>
+</div>

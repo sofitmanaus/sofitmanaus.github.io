@@ -1,0 +1,51 @@
+.card-title{ font-weight:300; }
+
+form {
+  padding-top: 10px;
+  font-size: 14px;
+
+  .form-row>.col {
+    padding-bottom: 10px;
+
+    .invalid-feedback>div {
+      font-size: 0.8rem;
+    }
+
+    .is-invalid {
+      & + .input-group-append>.input-group-text {
+        border-color: #dc3545 !important;
+      }
+    }
+
+    .form-control:focus {
+      & + .input-group-append>.input-group-text {
+        border-color: #80bdff;
+      }
+    }
+
+    .input-group-append {
+      justify-content: flex-end;
+      margin-top: -38px;
+      position: absolute;
+      right: 5px;
+
+      .input-group-text {
+        background-color: white;
+        padding: .65rem .75rem;
+        border-left: none;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        padding-bottom: 0.61rem;
+
+        .fa-eye {
+          width: 20px;
+        }
+      }
+    }
+  }
+
+  .btn {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}
