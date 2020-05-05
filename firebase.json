@@ -6,10 +6,7 @@
     ],
     "source": "functions"
   },
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
+  "firestore": {},
   "hosting": {
     "public": "dist/sofit",
     "ignore": [
@@ -24,7 +21,5 @@
       }
     ]
   },
-  "storage": {
-    "rules": "storage.rules"
-  }
+  "storage": {}
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FoodModel } from 'src/app/core/models/food.model';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { StateChange } from 'ng-lazyload-image';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cardapio',
@@ -16,7 +17,7 @@ export class CardapioComponent implements OnInit {
       options: [],
       price: 22,
       title: 'Tortilha Integrais',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Ftortillas.png?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Ftortillas.png?alt=media`,
       loading: true
     },
     {
@@ -33,7 +34,7 @@ export class CardapioComponent implements OnInit {
       ],
       price: 26,
       title: 'Granola Funcional',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Fgranola.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Fgranola.jpg?alt=media`,
       loading: true
     },
     {
@@ -54,7 +55,7 @@ export class CardapioComponent implements OnInit {
       ],
       price: 22,
       title: 'Iogurte Caseiro',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Fiogurte.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Fiogurte.jpg?alt=media`,
       loading: true
     },
     {
@@ -75,7 +76,7 @@ export class CardapioComponent implements OnInit {
       ],
       price: 25,
       title: 'Leites Vegetais',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Fleite_vegetal.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Fleite_vegetal.jpg?alt=media`,
       loading: true
     },
     {
@@ -96,7 +97,7 @@ export class CardapioComponent implements OnInit {
       ],
       price: 62,
       title: 'Quiches',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Fquiche.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Fquiche.jpg?alt=media`,
       loading: true
     },
     {
@@ -109,7 +110,7 @@ export class CardapioComponent implements OnInit {
       ],
       price: 80,
       title: 'Mini Quiches',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Fmini_quiche.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Fmini_quiche.jpg?alt=media`,
       loading: true
     },
     {
@@ -134,7 +135,7 @@ export class CardapioComponent implements OnInit {
       ],
       price: 72,
       title: 'Cupcakes',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Fcupcake.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Fcupcake.jpg?alt=media`,
       loading: true
     },
     {
@@ -142,7 +143,7 @@ export class CardapioComponent implements OnInit {
       options: [],
       price: 65,
       title: 'Cheesecake Low-carb',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Fcheesecake.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Fcheesecake.jpg?alt=media`,
       loading: true
     },
     {
@@ -150,7 +151,7 @@ export class CardapioComponent implements OnInit {
       options: [],
       price: 65,
       title: 'Torta de Nozes',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Ftorta_nozes.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Ftorta_nozes.jpg?alt=media`,
       loading: true
     },
     {
@@ -171,7 +172,7 @@ export class CardapioComponent implements OnInit {
       ],
       price: 12,
       title: 'Frutas Desidratadas',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Ffruta_desidratada.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Ffruta_desidratada.jpg?alt=media`,
       loading: true
     },
     {
@@ -179,7 +180,7 @@ export class CardapioComponent implements OnInit {
       options: [],
       price: 15,
       title: 'Mix de Nuts Caramelizadas',
-      image: 'https://firebasestorage.googleapis.com/v0/b/sofit-d7d06.appspot.com/o/food%2Fnuts_caramelizados.jpg?alt=media',
+      image: `https://firebasestorage.googleapis.com/v0/b/${environment.firebaseConfig.storageBucket}/o/food%2Fnuts_caramelizados.jpg?alt=media`,
       loading: true
     }
   ]

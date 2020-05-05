@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "sofit-d7d06"
+    "default": "sofit-d7d06",
+    "dev": "sofit-dev"
   }
 }

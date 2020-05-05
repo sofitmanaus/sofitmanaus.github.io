@@ -47,7 +47,7 @@
       <div class="col">
         <input
           type="password"
-          class="form-control"
+          class="form-control password"
           formControlName="password"
           #password
           placeholder="Senha" [ngClass]="{ 'is-invalid': formControls.password.errors && (formControls.password.dirty || formControls.password.touched) }">
@@ -66,7 +66,7 @@
       <div class="col">
         <input
         type="password"
-        class="form-control"
+        class="form-control confirm-password"
         placeholder="Confirmar Senha"
         formControlName="confirmPassword"
         #confirmPassword
