@@ -5,9 +5,9 @@ import { UserModel } from '../models/user.model'
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore'
 import { Router } from '@angular/router'
 import { switchMap } from 'rxjs/operators'
-import { auth } from 'firebase/app'
 import { AngularFirestoreDocument } from '@angular/fire/firestore'
 import { UserDataService } from './user-data.service'
+import { auth } from 'firebase'
 
 @Injectable({
   providedIn: 'root'
@@ -57,9 +57,14 @@ export class AuthService {
   }
 
   async facebookSignIn() {
-    const provider = new auth.FacebookAuthProvider()
-    const credential = await this.afAuth.signInWithPopup(provider)
-    return this.updateUserData(credential.user)
+    const user = await this.linkFacebook()
+    if (!user.emailVerified)
+    {
+      this.afAuth.signOut()
+      throw new Error("Você ainda não verificou seu email.");
+    } else {
+      return this.updateUserData(user)
+    }
   }
 
   async emailSignUp(user: UserModel) {
@@ -68,14 +73,15 @@ export class AuthService {
     return this.updateUserData(credential.user, user.password, user.firstName, user.lastName)
   }
 
+  async getSignInMethods(email:string) {
+    return await this.afAuth.fetchSignInMethodsForEmail(email)
+  }
+
   async emailSignIn(user: UserModel) {
     const credential = await this.afAuth.signInWithEmailAndPassword(user.email, user.password)
-    console.log(credential)
     if (credential.user.emailVerified !== true) {
       throw new Error("Você ainda não verificou seu email.");
     } else {
-      console.log(credential.user, user.password)
-
       const userRef = await this.firestore.doc(`users/${credential.user.uid}`).get().toPromise()
       const userData = userRef.data()
 
@@ -87,7 +93,23 @@ export class AuthService {
         photoURL: userData.photoURL
       }
       this.userData.save(data)
+      return credential
     }
+  }
+
+  async getEmailPassCred(email: string, password: string) {
+    return auth.EmailAuthProvider.credential(email, password)
+
+  }
+
+  async linkCredential(credential: auth.AuthCredential) {
+    return (await this.afAuth.currentUser).linkWithCredential(credential)
+  }
+
+  async linkFacebook() {
+    const provider = new auth.FacebookAuthProvider()
+    const credential = await this.afAuth.signInWithPopup(provider)
+    return credential.user
   }
 
   async sendVerificationEmail() {
@@ -96,9 +118,12 @@ export class AuthService {
   }
 
   async signOut() {
-    await this.afAuth.signOut()
     this.userData.remove()
-    return this.router.navigate(['/login'])
+    await this.afAuth.signOut()
+  }
+
+  async getCurrentUser() {
+    return await this.afAuth.currentUser
   }
 
   // Desestruturando o objeto para designar automaticamente os valores

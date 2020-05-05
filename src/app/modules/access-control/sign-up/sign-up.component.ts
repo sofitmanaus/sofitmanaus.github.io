@@ -111,12 +111,13 @@ export class SignUpComponent implements OnInit {
     this.loading = true;
     this.auth.emailSignUp(this.signupForm.value)
     .then(res => {
-      this.loading = true;
-      this.emailSentSwal().then(() => {
-        if (!Swal.isTimerRunning()) this.router.navigateByUrl('/app/cardapio')
-      })
+      this.loading = false
+      this.emailSentSwal()
     })
-    .catch(error => this.toastr.error(error.code, 'Não foi possivel criar sua conta.'))
+    .catch(error => {
+      this.loading = false;
+      this.toastr.error(error.code, 'Não foi possivel criar sua conta.')
+    })
   }
 
   private emailSentSwal() {
@@ -126,7 +127,8 @@ export class SignUpComponent implements OnInit {
       icon: 'warning',
       showCloseButton: true,
       timer: 3000,
-      timerProgressBar: true
+      timerProgressBar: true,
+      onAfterClose: () => { this.router.navigateByUrl('/app/cardapio') }
     })
   }
 

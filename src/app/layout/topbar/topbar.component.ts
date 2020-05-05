@@ -27,7 +27,7 @@ export class TopbarComponent implements OnInit {
   }
 
   signOut() {
-    this.auth.signOut().then(res => this.router.navigate(['/login']))
+    this.auth.signOut().then(res => this.router.navigate(['/app/cardapio']))
   }
 
   setMyStyles() {
@@ -46,8 +46,10 @@ export class TopbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userData.get();
-    this.photoURL = this.user.photoURL;
-    this.firstName = this.user.firstName
+    if (this.user) {
+      if (this.user.photoURL) this.photoURL = this.user.photoURL;
+      if (this.user.photoURL) this.firstName = this.user.firstName
+    }
 
     // Verifica os eventos quando a página é atualizada
     this.route.url.subscribe(() => {

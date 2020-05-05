@@ -5,8 +5,6 @@
   z-index: 1;
 
   .nav-container {
-    display: flex;
-    justify-content: space-between;
     backface-visibility: hidden;
 
     .navbar-toggler {
@@ -35,6 +33,32 @@
       background-repeat: no-repeat;
       background-size: cover;
     }
+
+    .dropdown-toggle {
+      background-color: transparent;
+      border-color: transparent;
+
+      &::after {
+        color: white;
+      }
+
+      + .dropdown-menu {
+        margin-left: -96px;
+        box-shadow: 0 1px 15px rgba(27,31,35,.15);
+
+        .arrow-up {
+          width: 0;
+          height: 0;
+          position: absolute;
+          top: 0;
+          right: 9px;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 8px solid white;
+          margin-top: -7px;
+        }
+      }
+    }
   }
 
   .navbar-brand > img {
@@ -54,11 +78,21 @@
     margin-left: 12px !important;
   }
 
+  .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+
+  }
+
 }
 
 @media screen and (max-width: 992px) {
 
   .nav-container {
     width: 100%;
+  }
+
+  .nav-item {
+    border-top: 1px solid hsla(0,0%,100%,.15)
   }
 }
