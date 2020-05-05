@@ -1,0 +1,66 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // This rule allows anyone on the internet to view, edit, and delete
+    // all data in your Firestore database. It is useful for getting
+    // started, but it is configured to expire after 30 days because it
+    // leaves your app open to attackers. At that time, all client
+    // requests to your Firestore database will be denied.
+    //
+    // Make sure to write security rules for your app before that time, or else
+    // your app will lose access to your Firestore database
+    
+    match /food/{foodId} {
+    	allow read;
+      allow write: if getRole('admin') == true;
+    }
+    
+    match /users/{userId} {
+    	allow read: if isSignedIn();
+      // Verifica que o usuário não se deu o cargo de admin 
+      allow create: if request.resource.data.roles.keys().hasAny(['admin']) == false;
+      allow update, delete: if isOwner(userId) && emailVerified();
+    }
+    
+    // Functions //
+    
+//     function existingData() {
+//     	return resource.data;
+//     }
+    
+//     function incomingData() {
+//     	return resource.data;
+//     }
+    
+    function emailVerified() {
+    	return request.auth.token.email_verified;
+    }
+    
+    function isSignedIn() {
+    	return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+    	return request.auth.uid == userId;
+    }
+    
+    function getRole(role) {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+    }
+    
+    match /posts/{document} {
+  
+      allow read: if getRole('client') == true;
+      allow write: if getRole('admin') == true;
+		}
+    
+    match /markers/{document} {
+      allow read, write;
+		}
+    
+    match /aggregation/users {
+      allow read;
+		}
+  }
+}
