@@ -128,7 +128,10 @@ export class SignUpComponent implements OnInit {
       showCloseButton: true,
       timer: 3000,
       timerProgressBar: true,
-      onAfterClose: () => { this.router.navigateByUrl('/app/cardapio') }
+      onAfterClose: async () => {
+        await this.auth.signOut()
+        this.router.navigateByUrl('/app/cardapio')
+      }
     })
   }
 
