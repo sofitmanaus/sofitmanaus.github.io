@@ -17,9 +17,17 @@ form {
       }
     }
 
-    .form-control:focus {
-      & + .input-group-append>.input-group-text {
-        border-color: #80bdff;
+    .form-control {
+
+      &.password, &.confirm-password {
+        padding-right: 37px;
+        background-image: none;
+      }
+
+      &:focus {
+        & + .input-group-append>.input-group-text {
+          border-color: #80bdff;
+        }
       }
     }
 
@@ -30,7 +38,7 @@ form {
       right: 5px;
 
       .input-group-text {
-        background-color: white;
+        background-color: transparent;
         padding: .65rem .75rem;
         border-left: none;
         border-top-left-radius: 0px;

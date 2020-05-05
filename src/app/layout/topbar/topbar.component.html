@@ -4,7 +4,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
       <h4 class="page-title">{{pageTitle}}</h4>
-      <a class="navbar-brand p-0 mr-0" href="#">
+      <a class="navbar-brand p-0 mr-0">
         <img src="/assets/images/sofit-logo-nocircle.png" alt="sofit logo">
       </a>
   </div>
@@ -13,7 +13,7 @@
     <ul class="navbar-nav mt-2 mt-lg-0 pr-lg-3 text-white">
       <li *ngIf="user; else signInUp" class="nav-item d-none d-lg-flex">
         <div class="dropdown show d-flex flex-column justify-content-center">
-          <a class="btn dropdown-toggle pr-0" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="btn dropdown-toggle pr-0" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="rounded-circle mr-2" [src]="photoURL" alt="User profile picture" width="25px" height="25px">
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -22,11 +22,11 @@
               Logado como <b class="d-block">{{firstName}}</b>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Perfil</a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item">Perfil</a>
+            <a class="dropdown-item">
               <span *ngIf="user; else login" (click)="signOut()">Sair</span>
               <ng-template #login>
-                <span class="" routerLink="/login/sign-in">
+                <span class="clickable" routerLink="/login/sign-in">
                   Entrar
                 </span>
               </ng-template>
@@ -36,13 +36,13 @@
       </li>
       <ng-template #signInUp>
         <li class="nav-item d-none d-lg-flex">
-          <span class="d-flex flex-column justify-content-center mr-3" routerLink="/login/sign-in">Entrar</span>
+          <span class="d-flex flex-column justify-content-center mr-3 clickable" routerLink="/login/sign-in">Entrar</span>
           <button type="button" class="btn btn-outline-light" routerLink="/login/sign-up">Cadastre-se!</button>
         </li>
       </ng-template>
 
       <li class="nav-item d-lg-none py-2 py-lg-0 border-top-0" *ngIf="!user">
-        <span class="d-flex flex-column justify-content-center mr-3" routerLink="/login/sign-in">Entrar</span>
+        <span class="d-flex flex-column justify-content-center mr-3 clickable" routerLink="/login/sign-in">Entrar</span>
       </li>
       <li class="nav-item d-lg-none py-2 py-lg-0" *ngIf="!user">
         <button type="button" class="btn btn-outline-light" routerLink="/login/sign-up">Cadastre-se!</button>
