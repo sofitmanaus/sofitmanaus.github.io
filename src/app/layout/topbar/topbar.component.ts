@@ -26,8 +26,9 @@ export class TopbarComponent implements OnInit {
   ) {
   }
 
-  signOut() {
-    this.auth.signOut().then(res => this.router.navigate(['/app/cardapio']))
+  async signOut() {
+    await this.auth.signOut()
+    this.router.navigate(['/app/cardapio'])
   }
 
   setMyStyles() {
