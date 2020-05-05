@@ -55,21 +55,10 @@ export class SignInComponent implements OnInit {
       })
       .catch(error => {
         this.loading = false;
-        if (error.message == 'Você ainda não verificou seu email.') {
-          this.verificationSwal().then(res => {
-            if('value' in res) this.auth.sendVerificationEmail()
-              .then(() => {
-                this.emailSentSwal();
-                this.auth.signOut()
-              })
-            if('value' in res) this.auth.signOut()
-          })
-        } else {
-          error['email'] = this.signInForm.value.email
-          error['credential'] = {}
-          error.credential['signInMethod'] = 'password'
-          this.handleLoginErrors(error)
-        }
+        error['email'] = this.signInForm.value.email
+        error['credential'] = {}
+        error.credential['signInMethod'] = 'password'
+        this.handleLoginErrors(error)
       })
   }
 
@@ -109,7 +98,7 @@ export class SignInComponent implements OnInit {
       title: 'Opa!',
       text: 'Você ainda não verificou o seu email.',
       icon: 'error',
-      confirmButtonText: 'Reenviar verificação',
+      confirmButtonText: 'Enviar verificação',
       showCloseButton: true
     })
   }
@@ -159,30 +148,46 @@ export class SignInComponent implements OnInit {
 
   private async handleLoginErrors(error) {
     console.error(error)
-    switch (error.code) {
-      case 'invalid-argument':
-        this.toastr.error('Os dados inseridos estão incorretos', 'Não foi possivel fazer o login.')
-        break
-      case 'auth/user-not-found':
-        this.toastr.error('Email não está registrado', 'Não foi possivel fazer o login.')
-        break
-      case 'auth/cancelled-popup-request':
-        this.toastr.error('O popup foi fechado', 'Não foi possivel fazer o login.')
-        break
-      case 'auth/popup-closed-by-user':
-        this.toastr.error('O popup foi fechado', 'Não foi possivel fazer o login.')
-        break
-      case 'auth/account-exists-with-different-credential':
-        const methods = await this.auth.getSignInMethods(error.email)
-        this.accountAlreadyExists(error.email, methods, error.credential)
-        break
-      case 'auth/wrong-password':
-        // desisto k
-        this.toastr.error('Dados incorretos', 'Não foi possivel fazer o login.')
-        break
-      default:
-        this.toastr.error(error.code, 'Não foi possivel fazer o login.')
-        break
+    if (error.message == 'Você ainda não verificou seu email.') {
+      this.verificationSwal().then(res => {
+        if('value' in res) this.auth.sendVerificationEmail()
+          .then(() => {
+            this.emailSentSwal();
+            this.auth.signOut()
+          })
+        if('value' in res) this.auth.signOut()
+      })
+    } else {
+      switch (error.code) {
+        case 'invalid-argument':
+          this.toastr.error('Os dados inseridos estão incorretos', 'Não foi possivel fazer o login.')
+          break
+        case 'auth/user-not-found':
+          this.toastr.error('Email não está registrado', 'Não foi possivel fazer o login.')
+          break
+        case 'auth/cancelled-popup-request':
+          this.toastr.error('O popup foi fechado', 'Não foi possivel fazer o login.')
+          break
+        case 'auth/popup-closed-by-user':
+          this.toastr.error('O popup foi fechado', 'Não foi possivel fazer o login.')
+          break
+        case 'auth/account-exists-with-different-credential':
+          const methods = await this.auth.getSignInMethods(error.email)
+          this.accountAlreadyExists(error.email, methods, error.credential)
+          break
+        case 'auth/wrong-password':
+          const meth = await this.auth.getSignInMethods(error.email)
+          if (!meth.includes('password')) {
+            const credential = await this.auth.getEmailPassCred(this.signInForm.value.email, this.signInForm.value.password);
+            this.accountAlreadyExists(error.email, meth, credential)
+            break
+          }
+          this.toastr.error('Dados incorretos', 'Não foi possivel fazer o login.')
+          break
+        default:
+          this.toastr.error(error.code, 'Não foi possivel fazer o login.')
+          break
+      }
     }
   }
 
@@ -241,7 +246,7 @@ export class SignInComponent implements OnInit {
 
   private async linkCredentialSuccess(credential: auth.AuthCredential) {
     return await Swal.fire({
-      title: `Conta ${credential.signInMethod} vinculada com sucesso!`,
+      title: `Conta ${this.getMethod(credential.signInMethod)} vinculada com sucesso!`,
       icon: 'success',
       text: 'Você pode usá-la para se logar a partir de agora.',
       showCloseButton: true,

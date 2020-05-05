@@ -57,9 +57,14 @@ export class AuthService {
   }
 
   async facebookSignIn() {
-    const provider = new auth.FacebookAuthProvider()
-    const credential = await this.afAuth.signInWithPopup(provider)
-    return this.updateUserData(credential.user)
+    const user = await this.linkFacebook()
+    if (!user.emailVerified)
+    {
+      this.afAuth.signOut()
+      throw new Error("Você ainda não verificou seu email.");
+    } else {
+      return this.updateUserData(user)
+    }
   }
 
   async emailSignUp(user: UserModel) {
@@ -92,14 +97,19 @@ export class AuthService {
     }
   }
 
-  async linkEmail(email: string, password: string) {
-    const credential = await auth.EmailAuthProvider.credential(email, password)
-    const user = await this.afAuth.currentUser
-    return user.linkWithCredential(credential)
+  async getEmailPassCred(email: string, password: string) {
+    return auth.EmailAuthProvider.credential(email, password)
+
   }
 
   async linkCredential(credential: auth.AuthCredential) {
     return (await this.afAuth.currentUser).linkWithCredential(credential)
+  }
+
+  async linkFacebook() {
+    const provider = new auth.FacebookAuthProvider()
+    const credential = await this.afAuth.signInWithPopup(provider)
+    return credential.user
   }
 
   async sendVerificationEmail() {
