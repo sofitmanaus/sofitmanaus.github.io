@@ -24,6 +24,18 @@ export class SignInComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.auth.getCurrentUser().then(user => {
+      if (user) {
+        Swal.fire({
+          title: 'Você já está logado!',
+          text: 'Redirecionando ao cardápio...',
+          icon: 'error',
+          timer: 5000,
+          timerProgressBar: true,
+          onAfterClose: () => this.redirect()
+        })
+      }
+    })
     this.signInForm  =  this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -43,7 +55,6 @@ export class SignInComponent implements OnInit {
       })
       .catch(error => {
         this.loading = false;
-        console.error(error)
         if (error.message == 'Você ainda não verificou seu email.') {
           this.verificationSwal().then(res => {
             if('value' in res) this.auth.sendVerificationEmail()
@@ -54,17 +65,10 @@ export class SignInComponent implements OnInit {
             if('value' in res) this.auth.signOut()
           })
         } else {
-          switch (error.code) {
-            case 'invalid-argument':
-              this.toastr.error('Os dados inseridos estão incorretos', 'Não foi possivel fazer o login.')
-              break
-            case 'auth/user-not-found':
-              this.toastr.error('Email não está registrado', 'Não foi possivel fazer o login.')
-              break
-            default:
-              this.toastr.error(error.code, 'Não foi possivel fazer o login.')
-              break
-          }
+          error['email'] = this.signInForm.value.email
+          error['credential'] = {}
+          error.credential['signInMethod'] = 'password'
+          this.handleLoginErrors(error)
         }
       })
   }
@@ -81,7 +85,7 @@ export class SignInComponent implements OnInit {
         Swal.fire({
           title: 'Email enviado com sucesso!',
           showCloseButton: true,
-          timer: 3000,
+          timer: 5000,
           timerProgressBar: true
         })
       })
@@ -90,9 +94,10 @@ export class SignInComponent implements OnInit {
         if (error.message === 'EMAIL_NOT_FOUND') message = '(Email não encontrado)'
         Swal.fire({
           title: 'Opa!',
+          icon: 'error',
           text: 'Não foi possível enviar o email de recuperação'+ message + '.',
           showCloseButton: true,
-          timer: 3000,
+          timer: 5000,
           timerProgressBar: true
         })
       })
@@ -114,7 +119,7 @@ export class SignInComponent implements OnInit {
       title: 'Email de confirmação enviado!',
       icon: 'success',
       showCloseButton: true,
-      timer: 3000,
+      timer: 5000,
       timerProgressBar: true
     })
   }
@@ -125,7 +130,7 @@ export class SignInComponent implements OnInit {
       text: `Não foi possível fazer o login.\n(${error.message})`,
       icon: 'error',
       showCloseButton: true,
-      timer: 3000,
+      timer: 5000,
       timerProgressBar: true
     })
   }
@@ -171,6 +176,10 @@ export class SignInComponent implements OnInit {
         const methods = await this.auth.getSignInMethods(error.email)
         this.accountAlreadyExists(error.email, methods, error.credential)
         break
+      case 'auth/wrong-password':
+        // desisto k
+        this.toastr.error('Dados incorretos', 'Não foi possivel fazer o login.')
+        break
       default:
         this.toastr.error(error.code, 'Não foi possivel fazer o login.')
         break
@@ -191,8 +200,64 @@ export class SignInComponent implements OnInit {
       confirmButtonText: 'Sim, vincular conta'
     })
     if (linkSwal.value) {
-      this.inputPasswordSwal(email, errorCredential)
+      this.handleLoginMethods(methods[0], email, errorCredential)
     }
+  }
+
+  private async handleLoginMethods(method: string, email: string, errorCredential: auth.AuthCredential) {
+    switch (method) {
+      case 'google.com':
+        try {
+          this.loadingSwal()
+          await this.auth.googleSignIn()
+          const user = await this.auth.getCurrentUser()
+          await user.linkWithCredential(errorCredential)
+          Swal.close()
+          this.linkCredentialSuccess(errorCredential)
+        } catch (error) {
+          Swal.close()
+          this.handleLoginErrors(error)
+        }
+        break;
+    case 'facebook.com':
+      try {
+        this.loadingSwal()
+        const killme = await this.auth.getCurrentUser()
+        await this.auth.facebookSignIn()
+        const user = await this.auth.getCurrentUser()
+        await user.linkWithCredential(errorCredential)
+        Swal.close()
+        this.linkCredentialSuccess(errorCredential)
+      } catch (error) {
+        Swal.close()
+        this.handleLoginErrors(error)
+      }
+      break;
+    case 'password':
+      this.inputPasswordSwal(email, errorCredential)
+      break;
+    }
+  }
+
+  private async linkCredentialSuccess(credential: auth.AuthCredential) {
+    return await Swal.fire({
+      title: `Conta ${credential.signInMethod} vinculada com sucesso!`,
+      icon: 'success',
+      text: 'Você pode usá-la para se logar a partir de agora.',
+      showCloseButton: true,
+      timer: 5000,
+      timerProgressBar: true
+    })
+  }
+
+  private loadingSwal() {
+    Swal.fire({
+      title: 'Vinculando Conta...',
+      text: 'Por favor aguarde',
+      onBeforeOpen: () => {
+        Swal.showLoading()
+      },
+    })
   }
 
   private getMethod(method: string): string {
@@ -222,14 +287,7 @@ export class SignInComponent implements OnInit {
       try {
         await this.auth.emailSignIn({email, password})
         await this.auth.linkCredential(errorCredential)
-        await Swal.fire({
-          title: `Conta ${errorCredential.signInMethod} vinculada com sucesso!`,
-          icon: 'success',
-          text: 'Você pode usá-la para se logar a partir de agora.',
-          showCloseButton: true,
-          timer: 3000,
-          timerProgressBar: true
-        })
+        await this.linkCredentialSuccess(errorCredential)
         this.redirect()
       } catch(error) {
         console.error(error)

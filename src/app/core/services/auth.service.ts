@@ -74,12 +74,9 @@ export class AuthService {
 
   async emailSignIn(user: UserModel) {
     const credential = await this.afAuth.signInWithEmailAndPassword(user.email, user.password)
-    console.log(credential)
     if (credential.user.emailVerified !== true) {
       throw new Error("Você ainda não verificou seu email.");
     } else {
-      console.log(credential.user, user.password)
-
       const userRef = await this.firestore.doc(`users/${credential.user.uid}`).get().toPromise()
       const userData = userRef.data()
 
@@ -95,6 +92,12 @@ export class AuthService {
     }
   }
 
+  async linkEmail(email: string, password: string) {
+    const credential = await auth.EmailAuthProvider.credential(email, password)
+    const user = await this.afAuth.currentUser
+    return user.linkWithCredential(credential)
+  }
+
   async linkCredential(credential: auth.AuthCredential) {
     return (await this.afAuth.currentUser).linkWithCredential(credential)
   }
@@ -105,9 +108,12 @@ export class AuthService {
   }
 
   async signOut() {
-    await this.afAuth.signOut()
     this.userData.remove()
-    return this.router.navigate(['/login'])
+    await this.afAuth.signOut()
+  }
+
+  async getCurrentUser() {
+    return await this.afAuth.currentUser
   }
 
   // Desestruturando o objeto para designar automaticamente os valores

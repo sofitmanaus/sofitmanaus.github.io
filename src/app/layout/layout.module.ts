@@ -8,6 +8,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderSectionComponent } from './loader-section/loader-section.component';
 import { AccessControlRoutingModule } from '../modules/access-control/access-control-routing.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AccessControlRoutingModule } from '../modules/access-control/access-con
     CoreModule,
     BrowserAnimationsModule,
     AccessControlRoutingModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    LazyLoadImageModule
   ],
   exports: [
     TopbarComponent,

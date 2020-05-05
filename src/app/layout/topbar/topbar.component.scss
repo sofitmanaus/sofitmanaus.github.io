@@ -43,7 +43,7 @@
       }
 
       + .dropdown-menu {
-        margin-left: -102px;
+        margin-left: -96px;
         box-shadow: 0 1px 15px rgba(27,31,35,.15);
 
         .arrow-up {
@@ -90,5 +90,9 @@
 
   .nav-container {
     width: 100%;
+  }
+
+  .nav-item {
+    border-top: 1px solid hsla(0,0%,100%,.15)
   }
 }
