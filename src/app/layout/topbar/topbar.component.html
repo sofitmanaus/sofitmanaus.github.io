@@ -42,13 +42,18 @@
       </ng-template>
 
       <li class="nav-item d-lg-none py-2 py-lg-0 border-top-0" *ngIf="!user">
+        <span class="d-flex flex-column justify-content-center mr-3" routerLink="/login/sign-in">Entrar</span>
+      </li>
+      <li class="nav-item d-lg-none py-2 py-lg-0" *ngIf="!user">
         <button type="button" class="btn btn-outline-light" routerLink="/login/sign-up">Cadastre-se!</button>
       </li>
-      <li class="nav-item d-lg-none py-2 py-lg-0" [ngClass]="{'border-top-0': user}">
+      <li *ngIf="user" class="nav-item d-lg-none py-2 py-lg-0" [ngClass]="{'border-top-0': user}">
         <img [defaultImage]="'/assets/images/anonymous.png'" [lazyLoad]="photoURL" class="rounded-circle mr-2" alt="User profile picture" width="25px" height="25px">{{firstName}}
       </li>
-      <li class="nav-item d-lg-none py-2 py-lg-0">
-        <span (click)="signOut()"><i class="fas fa-sign-out-alt"></i> Sair</span>
+      <li *ngIf="user" class="nav-item d-lg-none py-2 py-lg-0">
+        <div (click)="signOut()">
+          <i class="fas fa-sign-out-alt"></i> Sair
+        </div>
       </li>
     </ul>
   </div>
