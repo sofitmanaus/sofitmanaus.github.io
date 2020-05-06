@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "AIzaSyAUjh5LJ12OAt8vHGbaHmiHC8LG3CEe3MA",
+    apiKey: "AIzaSyAvzCPYkklyyM1ekzqNGU0fCa5vZnBODAY",
     authDomain: "sofit-dev.firebaseapp.com",
     databaseURL: "https://sofit-dev.firebaseio.com",
     projectId: "sofit-dev",
