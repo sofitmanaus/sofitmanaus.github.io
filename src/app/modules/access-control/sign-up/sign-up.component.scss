@@ -1,31 +1,33 @@
-.card-title{ font-weight:300; }
+.card-title {
+  font-weight: 300;
+}
 
 form {
   padding-top: 10px;
   font-size: 14px;
 
-  .form-row>.col {
+  .form-row > .col {
     padding-bottom: 10px;
 
-    .invalid-feedback>div {
+    .invalid-feedback > div {
       font-size: 0.8rem;
     }
 
     .is-invalid {
-      & + .input-group-append>.input-group-text {
+      & + .input-group-append > .input-group-text {
         border-color: #dc3545 !important;
       }
     }
 
     .form-control {
-
-      &.password, &.confirm-password {
+      &.password,
+      &.confirm-password {
         padding-right: 37px;
         background-image: none;
       }
 
       &:focus {
-        & + .input-group-append>.input-group-text {
+        & + .input-group-append > .input-group-text {
           border-color: #80bdff;
         }
       }
@@ -39,7 +41,7 @@ form {
 
       .input-group-text {
         background-color: transparent;
-        padding: .65rem .75rem;
+        padding: 0.65rem 0.75rem;
         border-left: none;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
@@ -52,8 +54,18 @@ form {
     }
   }
 
-  .btn {
-    font-size: 16px;
-    margin-top: 10px;
+  .btn-primary {
+    font-size: 1.2rem;
+    margin-top: 6px;
+  }
+}
+
+@media screen and (max-width: 558px) {
+  .col.text-secondary {
+    display: flex;
+
+    input {
+      align-self: center;
+    }
   }
 }
