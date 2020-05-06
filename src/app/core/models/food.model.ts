@@ -7,4 +7,5 @@ export class FoodModel {
   title: string;
   image: string;
   loading: boolean = true;
+  express: boolean;
 }

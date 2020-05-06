@@ -13,12 +13,14 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { MapComponent } from './map/map.component';
 import { MapService } from 'src/app/core/services/map.service';
 import { FormsModule } from '@angular/forms';
+import { CardapioHeaderComponent } from './cardapio-header/cardapio-header.component';
 @NgModule({
 
   declarations: [
     AppMainComponent,
     CardapioComponent,
-    MapComponent
+    MapComponent,
+    CardapioHeaderComponent
   ],
   imports: [
     CommonModule,
