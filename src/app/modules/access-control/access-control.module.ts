@@ -11,6 +11,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { UniqueEmailValidator } from 'src/app/core/validators/unique-email.validator';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     AdminComponent,
     SignInComponent,
     SignUpComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    TermsOfServiceComponent
   ],
   imports: [
     CommonModule,

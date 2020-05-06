@@ -8,6 +8,8 @@ import { AdminGuard } from 'src/app/core/guards/admin.guard';
 import { CanReadGuard } from 'src/app/core/guards/can-read.guard';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, children: [
@@ -15,9 +17,11 @@ const routes: Routes = [
     { path: 'content', component: ContentComponent, canActivate:[CanReadGuard] },
     { path: 'admin', component: AdminComponent, canActivate:[AdminGuard] },
     { path: 'sign-in', component: SignInComponent },
-    { path: 'sign-up', component: SignUpComponent }
+    { path: 'sign-up', component: SignUpComponent },
     ]
-  }
+  },
+  { path: 'politica-de-privacidade', component: PrivacyPolicyComponent },
+  { path: 'termos-de-uso', component: TermsOfServiceComponent },
 ];
 
 @NgModule({
