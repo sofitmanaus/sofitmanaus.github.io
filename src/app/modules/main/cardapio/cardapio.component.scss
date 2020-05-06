@@ -21,6 +21,16 @@
     background-size: cover;
     z-index: 0;
 
+    .badge {
+      position: absolute;
+      padding: 5px;
+      top: -12px;
+      right: -12px;
+      border-radius: 2.5rem;
+      background-color: #25D366;
+      transition: all .2s ease-in-out;
+    }
+
     app-card-load {
       margin-bottom: -135px;
       z-index: 2;
@@ -53,7 +63,6 @@
     &:hover {
       transform: translateY(-5px);
       -webkit-transform: translateY(-5px);
-
       .gradient::before {
         opacity: 1;
       }

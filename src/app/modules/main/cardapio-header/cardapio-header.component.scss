@@ -1,0 +1,119 @@
+@import '../../../../scss/variables';
+
+.fa-map-marker-alt {
+  margin-right: 0.6rem;
+}
+
+.header-text {
+  z-index: 1;
+  color: white;
+}
+
+.header-section {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('/assets/images/jumbo.png');
+  border-radius: 0px;
+
+  .badge {
+    padding: 5px;
+    border-radius: 2.5rem;
+    background-color: #25D366;
+  }
+}
+
+.overlay {
+  position: relative;
+  z-index: 0;
+}
+
+.overlay:after {
+  position: absolute;
+  content:"";
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  opacity: .7;
+  background-color: black;
+  z-index: -1;
+}
+
+a {
+  transition: color .2s ease-out;
+  color: lighten(#007bff, 10%);
+  &:hover {
+    color: lighten(#007bff, 15%);
+  }
+}
+
+
+@media only screen and (max-width: 992px) {
+  .header-section {
+    background-image: url('/assets/images/jumbo.png') !important;
+  }
+
+  .display-4 {
+    font-size: 3rem;
+  }
+}
+
+.cool-btn {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-family: 'Gotham Rounded';
+  font-weight: 600;
+  color: $text;
+  padding: 0.55em 0.8em;
+  background: $light-blue;
+  // border: 2px solid $blue-border;
+  border-radius: 1rem;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+  -webkit-transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+
+  &:hover {
+    background: $blue;
+    color: $text;
+  }
+  &:active {
+    background: $blue;
+    transform: translate(0em, 0.35em);
+  }
+
+  i {
+    color: $blue-border;
+  }
+
+  &.instagram {
+    background: radial-gradient(circle at 10% 115%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%) !important;
+    border: none !important;
+    font-size: 0.75rem !important;
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+
+    i {
+      color: $text !important;
+    }
+  }
+
+  &.whatsapp {
+    background-color: #25D366;
+    border: none !important;
+
+    i {
+      color: $text !important;
+    }
+  }
+
+}
+
+
