@@ -1,0 +1,14 @@
+.layout-section {
+  display: flex;
+  min-height: 100vh;
+
+  .terms-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    flex: 1;
+    background-color: #f5f5f5;
+  }
+}
+

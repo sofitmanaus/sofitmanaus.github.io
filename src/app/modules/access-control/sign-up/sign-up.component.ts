@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
   password: ElementRef
   @ViewChild('confirmPassword')
   confirmPassword: ElementRef
-
+  isSubmit = false
   loading = false
 
   constructor(
@@ -53,6 +53,7 @@ export class SignUpComponent implements OnInit {
       ],
       firstName: ['', [Validators.required, Validators.maxLength(255)]],
       lastName: ['', [Validators.required, Validators.maxLength(255)]],
+      acceptedTerms: ['', [Validators.required]],
     }, {updateOn: 'blur'});
 
     this.signupForm.controls.password.valueChanges.subscribe(() => {
@@ -104,7 +105,12 @@ export class SignUpComponent implements OnInit {
     }
 
   register() {
+    this.isSubmit = true
     if (this.signupForm.invalid) {
+      if (this.formControls.acceptedTerms.errors.required) {
+        this.toastr.clear()
+        this.toastr.error('Você não concordou com nossos termos!', 'Não foi possível registrar sua conta')
+      }
       return;
     }
 

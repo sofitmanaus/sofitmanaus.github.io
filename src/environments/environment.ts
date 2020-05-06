@@ -19,7 +19,7 @@ export const environment = {
   },
   APP: {
     NAME: 'Sofit',
-    OWNER: '@sofitmanaus',
+    OWNER: 'Sofit',
     CONTACT: 'kris.andre7@gmail.com',
     VERSION: '0.0.1'
   },
