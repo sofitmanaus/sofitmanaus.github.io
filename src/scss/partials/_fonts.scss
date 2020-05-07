@@ -63,8 +63,47 @@
 
 @font-face {
   font-family: 'Gotham Rounded';
-  src: local('Larke Sans Bold'),
+  src: local('Gotham Rounded'),
       url('/assets/fonts/gotham-rounded-bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Gilroy-Bold'), url('/assets/fonts/Gilroy/Gilroy-Bold.woff') format('woff');
+  }
+
+
+  @font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: bolder;
+  src: local('Gilroy-Heavy'), url('/assets/fonts/Gilroy/Gilroy-Heavy.woff') format('woff');
+  }
+
+
+  @font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Gilroy-Light'), url('/assets/fonts/Gilroy/Gilroy-Light.woff') format('woff');
+  }
+
+
+  @font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Gilroy-Medium'), url('/assets/fonts/Gilroy/Gilroy-Medium.woff') format('woff');
+  }
+
+
+  @font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Gilroy-Regular'), url('/assets/fonts/Gilroy/Gilroy-Regular.woff') format('woff');
+  }

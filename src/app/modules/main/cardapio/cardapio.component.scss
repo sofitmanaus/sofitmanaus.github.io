@@ -20,6 +20,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 0;
+    outline: 0;
 
     .badge {
       position: absolute;
@@ -60,7 +61,7 @@
       }
     }
 
-    &:hover {
+    &:hover, &:focus {
       transform: translateY(-5px);
       -webkit-transform: translateY(-5px);
       .gradient::before {

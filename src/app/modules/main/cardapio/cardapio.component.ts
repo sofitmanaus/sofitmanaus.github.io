@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodModel } from 'src/app/core/models/food.model';
-import { Cloudinary } from '@cloudinary/angular-5.x';
-import { StateChange } from 'ng-lazyload-image';
 import { environment } from 'src/environments/environment';
 import { formatDate } from '@angular/common';
 
@@ -14,6 +12,7 @@ export class CardapioComponent implements OnInit {
 
   public foods: Array<FoodModel> = [
     {
+      id: 0,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [],
       price: 22,
@@ -23,6 +22,7 @@ export class CardapioComponent implements OnInit {
       express: true
     },
     {
+      id: 1,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [
         {
@@ -41,6 +41,7 @@ export class CardapioComponent implements OnInit {
       express: true
     },
     {
+      id: 2,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [
         {
@@ -63,6 +64,7 @@ export class CardapioComponent implements OnInit {
       express: true
     },
     {
+      id: 3,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [
         {
@@ -85,6 +87,7 @@ export class CardapioComponent implements OnInit {
       express: false
     },
     {
+      id: 4,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [
         {
@@ -107,6 +110,7 @@ export class CardapioComponent implements OnInit {
       express: false
     },
     {
+      id: 5,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [
         {
@@ -121,6 +125,7 @@ export class CardapioComponent implements OnInit {
       express: false
     },
     {
+      id: 6,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [
         {
@@ -147,6 +152,7 @@ export class CardapioComponent implements OnInit {
       express: false
     },
     {
+      id: 7,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [],
       price: 65,
@@ -156,6 +162,7 @@ export class CardapioComponent implements OnInit {
       express: false
     },
     {
+      id: 8,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [],
       price: 65,
@@ -165,6 +172,7 @@ export class CardapioComponent implements OnInit {
       express: false
     },
     {
+      id: 9,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [
         {
@@ -187,6 +195,7 @@ export class CardapioComponent implements OnInit {
       express: false
     },
     {
+      id: 10,
       desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec velit et nisi pellentesque pharetra. Cras lacus neque, porttitor sit amet ex in, hendrerit tincidunt orci.',
       options: [],
       price: 15,
@@ -201,7 +210,7 @@ export class CardapioComponent implements OnInit {
   todayTime: number;
   isOpen = false
 
-  constructor(private cloudinary: Cloudinary) {
+  constructor() {
     this.todayTime = parseInt(formatDate(this.today, 'H:mm', 'en-US'));
     if (this.todayTime >= 8 && this.todayTime <= 18) {
       console.log('ABERTO')
