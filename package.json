@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "lite-server"
+    "dev": "lite-server",
+    "firebase": "ng build --prod && firebase use default && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
