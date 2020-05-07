@@ -9,13 +9,15 @@ import { LoaderComponent } from './loader/loader.component';
 import { LoaderSectionComponent } from './loader-section/loader-section.component';
 import { AccessControlRoutingModule } from '../modules/access-control/access-control-routing.module';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
     TopbarComponent,
     LoaderComponent,
-    LoaderSectionComponent
+    LoaderSectionComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     TopbarComponent,
     FooterComponent,
     LoaderComponent,
-    LoaderSectionComponent
+    LoaderSectionComponent,
+    BreadcrumbComponent
   ]
 })
 export class LayoutModule { }

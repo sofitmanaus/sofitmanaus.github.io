@@ -14,13 +14,15 @@ import { MapComponent } from './map/map.component';
 import { MapService } from 'src/app/core/services/map.service';
 import { FormsModule } from '@angular/forms';
 import { CardapioHeaderComponent } from './cardapio-header/cardapio-header.component';
+import { CardapioDetailsComponent } from './cardapio-details/cardapio-details.component';
 @NgModule({
 
   declarations: [
     AppMainComponent,
     CardapioComponent,
     MapComponent,
-    CardapioHeaderComponent
+    CardapioHeaderComponent,
+    CardapioDetailsComponent
   ],
   imports: [
     CommonModule,
