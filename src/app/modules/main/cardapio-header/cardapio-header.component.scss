@@ -48,6 +48,14 @@ a {
   }
 }
 
+.info-section {
+  background-color: $default-blue;
+
+  .list {
+    color: white;
+  }
+}
+
 
 @media only screen and (max-width: 992px) {
   .header-section {
@@ -58,6 +66,14 @@ a {
     font-size: 3rem;
   }
 }
+
+@media only screen and (min-width: 368px) {
+  .whatsapp {
+    margin-right: .5rem !important;
+  }
+}
+
+
 
 .cool-btn {
   position: relative;
