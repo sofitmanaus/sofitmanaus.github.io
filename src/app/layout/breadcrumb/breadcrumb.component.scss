@@ -1,0 +1,31 @@
+.breadcrumb {
+  background: none;
+  font-size: 0.8em;
+  margin: 0;
+
+  a:hover,
+  span:hover {
+    text-decoration: none;
+  }
+  li {
+    list-style: none;
+    float: left;
+    margin: 5px;
+
+    &:last-child {
+      margin-right: 20px;
+    }
+
+    &::after {
+      font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f054";
+    }
+
+    &:last-child::after {
+      content: "";
+    }
+
+    &:not(:first-child) {
+      margin-left: 0px;
+    }
+  }
+}

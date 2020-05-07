@@ -1,0 +1,31 @@
+.details-top {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 24px;
+  margin: 24px auto;
+
+  .details-image {
+    object-fit: cover;
+    width: 100%;
+    min-height: 20px;
+    max-height: 190px;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    line-height: 26px;
+    padding-right: 19px;
+  }
+
+  .price {
+    font-size: 1.7rem;
+    line-height: 35px;
+
+    .symbol {
+      font-size: 1.5rem;
+    }
+  }
+}
+
