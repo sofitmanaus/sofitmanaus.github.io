@@ -10,12 +10,14 @@ export class FooterComponent implements OnInit {
 
   public version: string;
   public owner: string;
+  isProd = false;
 
   constructor() { }
 
   ngOnInit(): void {
     this.version = environment.APP.VERSION;
     this.owner = environment.APP.OWNER;
+    this.isProd = environment.production
   }
 
 }

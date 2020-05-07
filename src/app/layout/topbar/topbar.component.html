@@ -3,10 +3,12 @@
     <button class="navbar-toggler" type="button" (click)="navbarCollapsed = !navbarCollapsed" [attr.aria-expanded]="!navbarCollapsed" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-      <h4 class="page-title">{{pageTitle}}</h4>
-      <a class="navbar-brand p-0 mr-0" routerLink="/app/cardapio">
-        <img src="/assets/images/sofit-logo-nocircle.png" alt="sofit logo">
-      </a>
+    <a class="navbar-brand p-0 mr-0" routerLink="/app/cardapio">
+      <img src="/assets/images/sofit-logo-nocircle.png" alt="sofit logo">
+    </a>
+    <button class="navbar-toggler" type="button" aria-label="Ir para o carrinho">
+      <i class="fas fa-shopping-bag text-white"></i>
+    </button>
   </div>
 
   <div class="collapse navbar-collapse px-3 px-lg-0" [collapse]="navbarCollapsed" [isAnimated]="true">
@@ -44,7 +46,7 @@
       <li class="nav-item d-lg-none py-2 py-lg-0 border-top-0" *ngIf="!user">
         <span class="d-flex flex-column justify-content-center mr-3 clickable" routerLink="/login/sign-in">Entrar</span>
       </li>
-      <li class="nav-item d-lg-none py-2 py-lg-0" *ngIf="!user">
+      <li class="nav-item d-lg-none pb-2 pt-3 py-lg-0" *ngIf="!user">
         <button type="button" class="btn btn-outline-light" routerLink="/login/sign-up">Cadastre-se!</button>
       </li>
       <li *ngIf="user" class="nav-item d-lg-none py-2 py-lg-0" [ngClass]="{'border-top-0': user}">
