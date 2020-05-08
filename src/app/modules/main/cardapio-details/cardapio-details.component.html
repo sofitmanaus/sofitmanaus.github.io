@@ -1,0 +1,23 @@
+<app-breadcrumb></app-breadcrumb>
+<app-loader-section *ngIf="loading"></app-loader-section>
+<section class="details-section" *ngIf="!loading">
+  <form>
+    <div class="container">
+      <div class="details-top">
+        <img [src]="food.image" class="rounded mx-auto d-block details-image mb-3" [alt]="food.title">
+        <div class="title font-weight-bold mb-3 mt-2">
+          {{food.title}}
+        </div>
+        <div class="description">
+          {{food.desc}}
+        </div>
+        <div class="price">R${{food.price + ",00"}}</div>
+        <div>
+          <i class="far fa-minus-square"></i>
+          <!-- <input type="number" name="quantity" formControlName="quantity" value="0"> -->
+          <i class="far fa-plus-square"></i>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

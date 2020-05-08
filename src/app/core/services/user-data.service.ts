@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { GenericSessionService } from './generic-session.service';
 import { StorageKeys } from '../constants/storage-keys.constants';
 import { UserModel } from '../models/user.model';
+import { GenericStorageService } from './generic-storage.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserDataService {
 
-    constructor(private storageData: GenericSessionService) { }
+    constructor(private storageData: GenericStorageService) { }
 
     public save(data): void {
       this.storageData.save(StorageKeys.USER_DATA, data);
